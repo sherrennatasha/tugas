@@ -1,0 +1,64 @@
+  
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>SIP - Sistem Informasi Pustakawan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav><br>
+    <div class="container-fluid">
+        <h2 class="text-center font-weight-bold">Sistem Informasi Pustakawan</h2><br>
+        <a th:href="@{/pustakawan/tambah}">
+            <button type="button" class="btn btn-info btn-sm">Tambah Pustakawan Baru</button>
+        </a>
+        <br><br>
+        <div class="card">
+            <div class="card-header bg-dark text-white">Daftar Seluruh Pustakawan</div>
+            <div class="card-body text-center">
+                <table class="table" th:if="${pasienList.size() > 0}">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Jenis Kelamin</th>
+                        <th scope="col">NIP Pustakawan</th>
+                        <th scope="col">Tempat Lahir</th>
+                        <th scope="col">Tanggal Lahir</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pustakawan : ${pasienList}">
+                        <td th:text="${pustakawan.nama}"></td>
+                        <td th:text="${pustakawan.jenisKelamin.equals(1)} ? 'Laki-Laki' : 'Perempuan'" />
+                        <td th:text="${pustakawan.nip}"></td>
+                        <td th:text="${pustakawan.tempatLahir}"></td>
+                        <td th:text="${#strings.substring(pustakawan.tanggalLahir,0,10)}"></td>
+                        <td>
+                            <div class="row">
+                                <div class="col">
+                                    <a th:href="@{/pustakawan/}+${pustakawan.idPustakawan}+'/tambah-diagnosis'">
+                                        <button type="button" class="btn btn-dark btn-sm">Tambah Diagnosis</button>
+                                    </a>
+                                    <a th:href="@{/pustakawan(idPustakawan=${pustakawan.idPustakawan})}">
+                                        <button type="button" class="btn btn-info btn-sm">Lihat</button>
+                                    </a>
+                                    <a th:href="@{/pustakawan/ubah/}+${pustakawan.idPustakawan}">
+                                        <button type="button" class="btn btn-dark btn-sm">Ubah</button>
+                                    </a>
+                                    <a th:href="@{/pustakawan/hapus/}+${pustakawan.idPustakawan}">
+                                        <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p th:unless="${pasienList.size() > 0}">Belum ada data pustakawan yang dimasukkan. Tekan "Tambah Pustakawan Baru" untuk menambahkan</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

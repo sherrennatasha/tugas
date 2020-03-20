@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Tambah Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav><br>
+<div class="container-fluid">
+    <h2 class="text-center font-weight-bold">Ubah Data Pasien</h2><br>
+    <a th:href="@{/}">
+        <button type="button" class="btn btn-info btn-sm">Kembali ke Beranda</button>
+    </a><br><br>
+    <div class="card">
+        <div class="card-header bg-dark text-white">Masukkan Data Baru Pasien</div>
+        <div class="card-body">
+            <form th:action="@{/pasien/ubah/} + ${pasien.nik}" th:object="${changeHandler}" method="POST">
+                <input type="hidden" th:field="${pasien.idPasien}" />
+                <input type="hidden" th:field="${pasien.emergencyContact.idEmergencyContact}" />
+                <div class="row">
+                    <div class="col-3">Nama</div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="nama" th:field="*{namaPasien}" th:value="${pasien.nama}"/>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-3">NIK</div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="nik" th:field="*{nikPasien}" th:value="${pasien.nik}"/>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-3">Jenis Kelamin</div>
+                    <div class="col-6">
+                        <select class="form-control" th:field="*{jenisKelaminPasien}" th:value="${pasien.jenisKelamin}">
+                            <option th:value="1" th:text="'Laki - Laki'"></option>
+                            <option th:value="2" th:text="'Perempuan'"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-3">Tanggal Lahir</div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="tanggalLahirPasien" th:field="*{tanggalLahirPasien}"/>
+                    </div>
+                </div>
+                <br>
+                <p> Harap masukkan dalam format DD/MM/YYYY </p>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-3">Tempat Lahir</div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="tempatLahir"
+                               th:field="*{tempatLahirPasien}"
+                               th:value="${pasien.tempatLahir}"/>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-3">Emergency Contact Name</div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="emergencyContactName"
+                               th:field="*{namaEmergency}"
+                               th:value="${pasien.emergencyContact.nama}"/>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-3">Emergency Contact NIK</div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="emergencyContactNik"
+                               th:field="*{nikEmergency}"
+                               th:value="${pasien.emergencyContact.nik}"/>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-3">Emergency Contact Phone</div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="emergencyContactPhone"
+                               th:field="*{nomorHpEmergency}"
+                               th:value="${pasien.emergencyContact.nomorHp}"/>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <button type="submit" class="btn btn-primary btn-sm"> Submit </button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Cari Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav><br>
+    <div class="container-fluid text-center">
+        <h2 class="font-weight-bold" th:text="'Hasil Pencarian Pasien'"></h2><br>
+            <div class="card">
+                <div class="card-header bg-dark text-white">Daftar Pasien</div>
+                <div class="card-body">
+                    <div th:if="${searchSuccess} == 0">
+                        <p> Data Pasien Tidak Ditemukan! </p>
+                    </div>
+                    <div th:unless="${searchSuccess} == 0">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Nama</th>
+                                <th scope="col">NIK</th>
+                                <th scope="col">Jenis Kelamin</th>
+                                <th scope="col">Kode Pasien</th>
+                                <th scope="col">Tempat Lahir</th>
+                                <th scope="col">Tanggal Lahir</th>
+                                <th scope="col">Telepon Emergency Contact</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="pasien : ${dataPencarian}">
+                                <td th:text="${pasien.nama}"></td>
+                                <td th:text="${pasien.nik}"></td>
+                                <td th:text="${pasien.jenisKelamin.equals(1)} ? 'Laki-Laki' : 'Perempuan'" />
+                                <td th:text="${pasien.kode}"></td>
+                                <td th:text="${pasien.tempatLahir}"></td>
+                                <td th:text="${#strings.substring(pasien.tanggalLahir,0,10)}"></td>
+                                <td th:text="${pasien.emergencyContact.getNomorHp()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <br>
+        <a th:href="@{/}">
+            <button type="button" class="btn btn-info btn-sm">Kembali ke Beranda</button>
+        </a>
+    </div>
+</body>
+</html>

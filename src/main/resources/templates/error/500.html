@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>500 Internal Server Error</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav><br>
+    <div class="text-center">
+        <h2 class="font-weight-bold">Mohon Maaf, Terjadi Kesalahan Pada Server!</h2><br>
+        <a th:href="@{/}">
+            <button type="button" class="btn btn-info btn-sm">Kembali ke Beranda</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Cari Pasien</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav><br>
+    <div class="container-fluid text-center">
+        <h2 class="font-weight-bold" th:text="'Pasien Pada Diagnosis ' + ${namaPenyakit}"></h2><br>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Laki - Laki</div>
+                    <div class="card-body">
+                        <p th:text="'Total Penderita: ' + ${counterMan} + ' Orang'"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Perempuan</div>
+                    <div class="card-body">
+                        <p th:text="'Total Penderita: ' + ${counterWoman} + ' Orang'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <a th:href="@{/}">
+            <button type="button" class="btn btn-info btn-sm">Kembali ke Beranda</button>
+        </a>
+    </div>
+</body>
+</html>

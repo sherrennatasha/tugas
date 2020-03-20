@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Informasi Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav><br>
+    <div class="container-fluid">
+        <h2 class="text-center font-weight-bold">Informasi Diagnosis Penyakit</h2><br>
+        <div class="card">
+            <div class="card-header bg-dark text-white">Detail Data Diagnosis Penyakit</div>
+            <div class="card-body">
+                <a th:href="@{/}">
+                    <button type="button" class="btn btn-info btn-sm">Kembali ke Beranda</button>
+                </a>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-4">Nama Penyakit</div>
+                    <div class="col" th:text="${penyakit.nama}"></div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-4">Kode Penyakit</div>
+                    <div class="col" th:text="${penyakit.kode}"></div>
+                </div>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header bg-dark text-white">Pasien yang Terdiagnosis</div>
+            <div class="card-body">
+                <table class="table" th:if="${listPenderita.size() > 0}">
+                    <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pasien : ${listPenderita}">
+                        <th scope="row" th:text="${listPenderita.indexOf(pasien) + 1}"></th>
+                        <td th:text="${pasien.getNama()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p th:unless="${listPenderita.size() > 0}">Belum ada pasien yang mengidap penyakit ini</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

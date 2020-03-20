@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Daftar Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav><br>
+    <div class="container-fluid">
+        <h2 class="text-center font-weight-bold">Daftar Semua Diagnosis Penyakit</h2><br>
+        <a th:href="@{/diagnosis-penyakit/tambah}">
+            <button type="button" class="btn btn-info btn-sm">Tambah Diagnosis Penyakit Baru</button>
+        </a>
+        <br><br>
+        <div class="card">
+            <div class="card-header bg-dark text-white">Daftar Diagnosis Penyakit</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Kode</th>
+                        <th scope="col">Jumlah Pasien Terdiagnosis</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="penyakit : ${diagnosisPenyakitList}">
+                        <td th:text="${penyakit.nama}"></td>
+                        <td th:text="${penyakit.kode}"></td>
+                        <td th:text="${penyakit.listPenderita.size()} + ' Orang'"></td>
+                        <td>
+                            <div class="row">
+                                <div class="col">
+                                    <a th:href="@{/diagnosis-penyakit(idDiagnosis=${penyakit.idDiagnosisPenyakit})}">
+                                        <button type="button" class="btn btn-info btn-sm">Lihat</button>
+                                    </a>
+                                    <a th:href="@{/diagnosis-penyakit/hapus/}+${penyakit.idDiagnosisPenyakit}">
+                                        <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

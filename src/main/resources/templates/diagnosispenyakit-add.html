@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Tambah Diagnosis Penyakit</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+    <nav th:replace="fragments/fragment :: navbar"></nav><br>
+    <div class="container-fluid">
+        <h2 class="text-center font-weight-bold">Tambah Diagnosis Penyakit</h2><br>
+        <a th:href="@{/}">
+            <button type="button" class="btn btn-info btn-sm">Kembali ke Beranda</button>
+        </a><br><br>
+        <div class="card">
+            <div class="card-header bg-dark text-white">Detail Data Diagnosis Penyakit</div>
+            <div class="card-body">
+                <form th:action="@{/diagnosis-penyakit/tambah}" th:object="${penyakit}" method="POST">
+                    <div class="row">
+                        <div class="col-3">Nama Penyakit</div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="nama"/>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="row">
+                        <div class="col-3">Kode Penyakit</div>
+                        <div class="col-6">
+                            <input class="form-control" type="text" name="kode"/>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <button type="submit" class="btn btn-primary btn-sm"> Submit </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
