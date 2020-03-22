@@ -54,7 +54,7 @@ public class PustakawanServiceImpl implements PustakawanService {
         pustakawan.setTempatLahir(dataHandler.getTempatLahirPustakawan());
         //pustakawan.setEmergencyContact(contact);
 
-        // Memasukkan asuransi ke data pasien
+        
         List<SpesialisasiModel> listSpesialisasi = new ArrayList<>();
 
         SpesialisasiModel targetSpesialisasi = spesialisasiDb.findByIdSpesialisasi(dataHandler.getIdSpesialisasi());

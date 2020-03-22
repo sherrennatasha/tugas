@@ -54,13 +54,13 @@ public class PustakawanController {
         return "message-info";
     }
 
-    @GetMapping(value = "/pasien/detail")
-    public String showPustakawanInfoById(@RequestParam(value = "idPustakawan") Long idPustakawan, Model model) {
+    @GetMapping(value = "/pustakawan/detail/{idPustakawan}")
+    public String showPustakawanInfoById(@PathVariable(value = "idPustakawan") Long idPustakawan, Model model) {
     	PustakawanModel pustakawan = pustakawanService.getPustakawanByIdPustakawan(idPustakawan);
         model.addAttribute("pustakawan", pustakawan);
         return "pustakawan-detail";
     }
-  
+    
 
     /**
      * // Membuka form untuk mengubah pasien
