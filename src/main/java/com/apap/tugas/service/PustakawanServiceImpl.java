@@ -1,14 +1,14 @@
 package com.apap.tugas.service;
 
-import com.apap.tugas.model.AsuransiModel;
+import com.apap.tugas.model.SpesialisasiModel;
 import com.apap.tugas.model.DiagnosisPenyakitModel;
-//import com.apap.tugas.model.EmergencyContactModel;
-import com.apap.tugas.model.PasienModel;
-import com.apap.tugas.other.AddPasienHandler;
-import com.apap.tugas.other.ChangePasienHandler;
-import com.apap.tugas.repository.AsuransiDb;
-import com.apap.tugas.repository.EmergencyContactDb;
-import com.apap.tugas.repository.PasienDb;
+
+import com.apap.tugas.model.PustakawanModel;
+import com.apap.tugas.other.AddPustakawanHandler;
+import com.apap.tugas.other.ChangePustakawanHandler;
+import com.apap.tugas.repository.SpesialisasiDb;
+
+import com.apap.tugas.repository.PustakawanDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,19 +21,16 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class PasienServiceImpl implements PasienService {
+public class PustakawanServiceImpl implements PustakawanService {
 
     @Autowired
-    PasienDb pasienDb;
+    PustakawanDb pustakawanDb;
 
     @Autowired
-    EmergencyContactDb emergencyContactDb;
-
-    @Autowired
-    AsuransiDb asuransiDb;
+    SpesialisasiDb spesialisasiDb;
 
     @Override
-    public String addPustakawan(AddPasienHandler dataHandler) {
+    public String addPustakawan(AddPustakawanHandler dataHandler) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String tanggalLahirStr = dataHandler.getTanggalLahirPustakawan();
         Date tanggalLahirPustakawan = null;
@@ -44,15 +41,8 @@ public class PasienServiceImpl implements PasienService {
             e.printStackTrace();
         }
 
-        // Membuat emergency contact baru
-        /**EmergencyContactModel contact = new EmergencyContactModel();
-        contact.setNama(dataHandler.getNamaEmergency());
-        contact.setNik(dataHandler.getNikEmergency());
-        contact.setNomorHp(dataHandler.getNomorHpEmergency());
-        emergencyContactDb.save(contact);
-		**/
         // Membuat pasien baru
-        PasienModel pustakawan = new PasienModel();
+        PustakawanModel pustakawan = new PustakawanModel();
 
         String nipPustakawan = createNipPustakawan(dataHandler.getJenisKelaminPustakawan(), tanggalLahirStr);
         pustakawan.setNip(nipPustakawan);
@@ -65,24 +55,24 @@ public class PasienServiceImpl implements PasienService {
         //pustakawan.setEmergencyContact(contact);
 
         // Memasukkan asuransi ke data pasien
-        List<AsuransiModel> listAsuransi = new ArrayList<>();
+        List<SpesialisasiModel> listSpesialisasi = new ArrayList<>();
 
-        AsuransiModel targetAsuransi = asuransiDb.findByIdAsuransi(dataHandler.getIdAsuransi());
-        listAsuransi.add(targetAsuransi);
-        pustakawan.setListAsuransi(listAsuransi);
-        pasienDb.save(pustakawan);
+        SpesialisasiModel targetSpesialisasi = spesialisasiDb.findByIdSpesialisasi(dataHandler.getIdSpesialisasi());
+        listSpesialisasi.add(targetSpesialisasi);
+        pustakawan.setListSpesialisasi(listSpesialisasi);
+        pustakawanDb.save(pustakawan);
 
         return nipPustakawan;
     }
 
     @Override
-    public List<PasienModel> getPustakawanList() {
-        return pasienDb.findAll();
+    public List<PustakawanModel> getPustakawanList() {
+        return pustakawanDb.findAll();
     }
 
     @Override
-    public PasienModel getPustakawanByIdPustakawan(Long idPustakawan) {
-        return pasienDb.findByIdPustakawan(idPustakawan);
+    public PustakawanModel getPustakawanByIdPustakawan(Long idPustakawan) {
+        return pustakawanDb.findByIdPustakawan(idPustakawan);
     }
     
     /**
@@ -92,13 +82,13 @@ public class PasienServiceImpl implements PasienService {
     }**/
 
     @Override
-    public void addDiagnosisToPustakawan(PasienModel pustakawan, DiagnosisPenyakitModel diagnosisPenyakit) {
+    public void addDiagnosisToPustakawan(PustakawanModel pustakawan, DiagnosisPenyakitModel diagnosisPenyakit) {
         pustakawan.addDiagnosisPenyakit(diagnosisPenyakit);
-        pasienDb.save(pustakawan);
+        pustakawanDb.save(pustakawan);
     }
 
     @Override
-    public String changePustakawanData(PasienModel pustakawan, ChangePasienHandler dataHandler) {
+    public String changePustakawanData(PustakawanModel pustakawan, ChangePustakawanHandler dataHandler) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String tanggalLahirStr = dataHandler.getTanggalLahirPustakawan();
         Date tanggalLahirPustakawan = null;
@@ -109,7 +99,7 @@ public class PasienServiceImpl implements PasienService {
             e.printStackTrace();
         }
 
-        PasienModel pustakawanTarget = pasienDb.findByIdPustakawan(pustakawan.getIdPustakawan());
+        PustakawanModel pustakawanTarget = pustakawanDb.findByIdPustakawan(pustakawan.getIdPustakawan());
         
         /**EmergencyContactModel contactTarget = emergencyContactDb.findByIdEmergencyContact(
                 pustakawan.getEmergencyContact().getIdEmergencyContact()
@@ -135,18 +125,18 @@ public class PasienServiceImpl implements PasienService {
         pustakawanTarget.setTanggalLahir(tanggalLahirPustakawan);
         pustakawanTarget.setTempatLahir(dataHandler.getTempatLahirPustakawan());
        // pasienTarget.setEmergencyContact(contactTarget);
-        pasienDb.save(pustakawanTarget);
+        pustakawanDb.save(pustakawanTarget);
         return nipPustakawan;
     }
 
     @Override
-    public void deletePustakawan(PasienModel pustakawan) {
-        pasienDb.delete(pustakawan);
+    public void deletePustakawan(PustakawanModel pustakawan) {
+       pustakawanDb.delete(pustakawan);
     }
 
     @Override
     public String createNipPustakawan(int jenisKelamin, String dateOfBirth) {
-        String nipPasien = "2020"; 
+        String nipPustakawan = "2020"; 
 
         // Checksum (2 Karakter terakhir) Generator
         final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -161,11 +151,11 @@ public class PasienServiceImpl implements PasienService {
 
         String[] tanggalLahirSplit = dateOfBirth.substring(0, 10).split("/");
 
-        nipPasien += tanggalLahirSplit[0];
-        nipPasien += tanggalLahirSplit[1];
-        nipPasien += tanggalLahirSplit[2].substring(2, 4);
-        nipPasien += String.valueOf(jenisKelamin);
-        nipPasien += checksum;
-        return nipPasien;
+        nipPustakawan += tanggalLahirSplit[0];
+        nipPustakawan += tanggalLahirSplit[1];
+        nipPustakawan += tanggalLahirSplit[2].substring(2, 4);
+        nipPustakawan += String.valueOf(jenisKelamin);
+        nipPustakawan += checksum;
+        return nipPustakawan;
     }
 }

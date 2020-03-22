@@ -17,32 +17,37 @@
         <div class="card">
             <div class="card-header bg-dark text-white">Daftar Seluruh Pustakawan</div>
             <div class="card-body text-center">
-                <table class="table" th:if="${pasienList.size() > 0}">
+                <table class="table" th:if="${pustakawanList.size() > 0}">
                     <thead>
                     <tr>
+                    	<th scope="col">No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Jenis Kelamin</th>
                         <th scope="col">NIP Pustakawan</th>
                         <th scope="col">Tempat Lahir</th>
                         <th scope="col">Tanggal Lahir</th>
+                        
                         <th scope="col"></th>
                     </tr>
+                   
+                  
                     </thead>
                     <tbody>
-                    <tr th:each="pustakawan : ${pasienList}">
+                    <tr th:each="pustakawan, pustStat : ${pustakawanList}">
+                    	<td th:text="${pustStat.count}"></td>
                         <td th:text="${pustakawan.nama}"></td>
                         <td th:text="${pustakawan.jenisKelamin.equals(1)} ? 'Laki-Laki' : 'Perempuan'" />
                         <td th:text="${pustakawan.nip}"></td>
                         <td th:text="${pustakawan.tempatLahir}"></td>
                         <td th:text="${#strings.substring(pustakawan.tanggalLahir,0,10)}"></td>
+                       	
+                   
                         <td>
                             <div class="row">
                                 <div class="col">
-                                    <a th:href="@{/pustakawan/}+${pustakawan.idPustakawan}+'/tambah-diagnosis'">
-                                        <button type="button" class="btn btn-dark btn-sm">Tambah Diagnosis</button>
-                                    </a>
+                                   
                                     <a th:href="@{/pustakawan(idPustakawan=${pustakawan.idPustakawan})}">
-                                        <button type="button" class="btn btn-info btn-sm">Lihat</button>
+                                        <button type="button" class="btn btn-info btn-sm">Jadwal</button>
                                     </a>
                                     <a th:href="@{/pustakawan/ubah/}+${pustakawan.idPustakawan}">
                                         <button type="button" class="btn btn-dark btn-sm">Ubah</button>
@@ -50,13 +55,16 @@
                                     <a th:href="@{/pustakawan/hapus/}+${pustakawan.idPustakawan}">
                                         <button type="button" class="btn btn-danger btn-sm">Hapus</button>
                                     </a>
+                                    <a th:href="@{/pustakawan/detail/}">
+                                        <button type="button" class="btn btn-danger btn-sm">Detail</button>
+                                    </a>
                                 </div>
                             </div>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <p th:unless="${pasienList.size() > 0}">Belum ada data pustakawan yang dimasukkan. Tekan "Tambah Pustakawan Baru" untuk menambahkan</p>
+                <p th:unless="${pustakawanList.size() > 0}">Belum ada data pustakawan yang dimasukkan. Tekan "Tambah Pustakawan Baru" untuk menambahkan</p>
             </div>
         </div>
     </div>

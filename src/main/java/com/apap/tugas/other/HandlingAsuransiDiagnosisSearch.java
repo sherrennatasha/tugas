@@ -2,15 +2,15 @@ package com.apap.tugas.other;
 
 public class HandlingAsuransiDiagnosisSearch {
 
-    private Long idAsuransi;
+    private Long idSpesialisasi;
     private Long idDiagnosisPenyakit;
 
-    public Long getIdAsuransi() {
-        return idAsuransi;
+    public Long getIdSpesialisasi() {
+        return idSpesialisasi;
     }
 
-    public void setIdAsuransi(Long idAsuransi) {
-        this.idAsuransi = idAsuransi;
+    public void setIdSpesialisasi(Long idSpesialisasi) {
+        this.idSpesialisasi = idSpesialisasi;
     }
 
     public Long getIdDiagnosisPenyakit() {

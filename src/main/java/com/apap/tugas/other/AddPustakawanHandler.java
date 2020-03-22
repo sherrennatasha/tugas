@@ -1,25 +1,29 @@
 package com.apap.tugas.other;
 
-public class ChangePasienHandler {
+public class AddPustakawanHandler {
 
-   // private String nikPasien;
     private String namaPustakawan;
     private Integer jenisKelaminPustakawan;
     private String tanggalLahirPustakawan;
     private String tempatLahirPustakawan;
+    private String namaSpesialisasi;
 
-   /** private String nikEmergency;
-    private String namaEmergency;
-    private String nomorHpEmergency;
-	
-    public String getNikPasien() {
-        return nikPasien;
+    private Long idSpesialisasi;
+
+    public Long getIdSpesialisasi() {
+        return idSpesialisasi;
     }
 
-    public void setNikPasien(String nikPasien) {
-        this.nikPasien = nikPasien;
+    public void setIdSpesialisasi(Long idSpesialisasi) {
+        this.idSpesialisasi = idSpesialisasi;
     }
-    **/
+    
+    public String getNamaSpesialisasi() {
+    	return namaSpesialisasi;
+    }
+    public void setNamaSpesialisasi(String namaSpesialisasi) {
+    	this.namaSpesialisasi = namaSpesialisasi;
+    }
 
     public String getNamaPustakawan() {
         return namaPustakawan;
@@ -52,28 +56,5 @@ public class ChangePasienHandler {
     public void setTempatLahirPustakawan(String tempatLahirPustakawan) {
         this.tempatLahirPustakawan = tempatLahirPustakawan;
     }
-/**
-    public String getNikEmergency() {
-        return nikEmergency;
-    }
 
-    public void setNikEmergency(String nikEmergency) {
-        this.nikEmergency = nikEmergency;
-    }
-
-    public String getNamaEmergency() {
-        return namaEmergency;
-    }
-
-    public void setNamaEmergency(String namaEmergency) {
-        this.namaEmergency = namaEmergency;
-    }
-
-    public String getNomorHpEmergency() {
-        return nomorHpEmergency;
-    }
-
-    public void setNomorHpEmergency(String nomorHpEmergency) {
-        this.nomorHpEmergency = nomorHpEmergency;
-    }**/
 }

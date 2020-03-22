@@ -1,4 +1,4 @@
-package com.apap.tugas.service;
+/**package com.apap.tugas.service;
 
 import com.apap.tugas.model.EmergencyContactModel;
 import com.apap.tugas.repository.EmergencyContactDb;
@@ -32,4 +32,4 @@ public class EmergencyContactServiceImpl implements EmergencyContactService {
     public void deleteEmergencyContact(EmergencyContactModel contact) {
         emergencyContactDb.delete(contact);
     }
-}
+}**/

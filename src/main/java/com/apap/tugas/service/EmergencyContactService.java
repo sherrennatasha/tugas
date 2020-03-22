@@ -1,4 +1,4 @@
-package com.apap.tugas.service;
+/**package com.apap.tugas.service;
 
 import com.apap.tugas.model.EmergencyContactModel;
 
@@ -10,3 +10,4 @@ public interface EmergencyContactService {
     EmergencyContactModel getEmergencyContactByIdEmergencyContact(Long idEmergencyContact);
     void deleteEmergencyContact(EmergencyContactModel emergencyContact);
 }
+**/

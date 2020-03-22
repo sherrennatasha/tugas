@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "pustakawan")
-public class PasienModel implements Serializable {
+public class PustakawanModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,6 @@ public class PasienModel implements Serializable {
     @Size(max = 13)
     @Column(name = "nip", nullable = false, unique=true)
     private String nip;
-
-    /**@NotNull
-    @Column(name = "nik", nullable = false)
-    private String nik;**/
 
     @NotNull
     @Size(max = 50)
@@ -41,16 +37,16 @@ public class PasienModel implements Serializable {
     @Column(name = "tempatLahir", nullable = false)
     private String tempatLahir;
 
-   // @OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "idEmergencyContact", referencedColumnName = "idEmergencyContact")
-    //private EmergencyContactModel emergencyContact;
+   @OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "idSpesialisasi", referencedColumnName = "idSpesialisasi")
+   private SpesialisasiModel spesialisasi;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "pustakawan_spesialisasi",
             joinColumns = @JoinColumn(name = "pustakawanId"),
             inverseJoinColumns = @JoinColumn(name = "spesialisasiId"))
-    private List<AsuransiModel> listSpesialisasi;
+    private List<SpesialisasiModel> listSpesialisasi;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -74,14 +70,6 @@ public class PasienModel implements Serializable {
     public void setNip(String nip) {
         this.nip = nip;
     }
-
-    /**public String getNik() {
-        return nik;
-    }
-
-    public void setNik(String nik) {
-        this.nik = nik;
-    }**/
 
     public String getNama() {
         return nama;
@@ -115,27 +103,27 @@ public class PasienModel implements Serializable {
         this.tempatLahir = tempatLahir;
     }
 
-    /**public EmergencyContactModel getEmergencyContact() {
-        return emergencyContact;
+    public SpesialisasiModel getSpesialisasi() {
+        return spesialisasi;
     }
 
-    public void setEmergencyContact(EmergencyContactModel emergencyContact) {
-        this.emergencyContact = emergencyContact;
-    }**/
+    public void setSpesialisasi(SpesialisasiModel spesialisasi) {
+        this.spesialisasi = spesialisasi;
+    }
 
-    public List<AsuransiModel> getListSpesialisasi() {
+    public List<SpesialisasiModel> getListSpesialisasi() {
         return listSpesialisasi;
     }
 
-    public void setListSpesialisasi(List<AsuransiModel> listSpesialisasi) {
+    public void setListSpesialisasi(List<SpesialisasiModel> listSpesialisasi) {
         this.listSpesialisasi = listSpesialisasi;
     }
 
-    public void addSpesialisasi(AsuransiModel spesialisasi){
+    public void addSpesialisasi(SpesialisasiModel spesialisasi){
         listSpesialisasi.add(spesialisasi);
     }
 
-    public void removeSpesialisasi(AsuransiModel spesialisasi){
+    public void removeSpesialisasi(SpesialisasiModel spesialisasi){
         listSpesialisasi.remove(spesialisasi);
     }
 

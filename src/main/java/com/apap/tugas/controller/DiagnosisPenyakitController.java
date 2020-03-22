@@ -2,9 +2,9 @@ package com.apap.tugas.controller;
 
 import com.apap.tugas.controller.*;
 import com.apap.tugas.model.DiagnosisPenyakitModel;
-import com.apap.tugas.model.PasienModel;
+import com.apap.tugas.model.PustakawanModel;
 import com.apap.tugas.service.DiagnosisPenyakitService;
-import com.apap.tugas.service.PasienService;
+import com.apap.tugas.service.PustakawanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +16,11 @@ import java.util.List;
 public class DiagnosisPenyakitController {
 
     @Autowired
-    private PasienService pasienService;
+    private PustakawanService pustakawanService;
 
     @Autowired
     private DiagnosisPenyakitService diagnosisPenyakitService;
 
-    // Menampilkan seluruh diagnosis penyakit
     @GetMapping(value = "/diagnosis-penyakit-all")
     public String showAllDiagnosisPenyakit(Model model)
     {
@@ -35,7 +34,7 @@ public class DiagnosisPenyakitController {
     public String showDiagnosisPenyakitById(@RequestParam(value = "idDiagnosis") Long idDiagnosisPenyakit, Model model)
     {
         DiagnosisPenyakitModel diagnosisPenyakit = diagnosisPenyakitService.getDiagnosisPenyakitByIdDiagnosisPenyakit(idDiagnosisPenyakit);
-        List<PasienModel> listPenderita = diagnosisPenyakit.getListPenderita();
+        List<PustakawanModel> listPenderita = diagnosisPenyakit.getListPenderita();
         model.addAttribute("penyakit", diagnosisPenyakit);
         model.addAttribute("listPenderita", listPenderita);
         return "diagnosispenyakit-detail";

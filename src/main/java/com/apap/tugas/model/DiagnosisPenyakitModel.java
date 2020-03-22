@@ -11,7 +11,7 @@ import java.util.List;
 public class DiagnosisPenyakitModel implements Serializable {
 
     @ManyToMany(mappedBy = "listDiagnosisPenyakit", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<PasienModel> listPustakawan;
+    private List<PustakawanModel> listPenderita;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,11 +51,11 @@ public class DiagnosisPenyakitModel implements Serializable {
         this.nama = nama;
     }
 
-    public List<PasienModel> getListPustakawan() {
-        return listPustakawan;
+    public List<PustakawanModel> getListPenderita() {
+        return listPenderita;
     }
 
-    public void setListPustakawan(List<PasienModel> listPustakawan) {
-        this.listPustakawan = listPustakawan;
+    public void setListPenderita(List<PustakawanModel> listPenderita) {
+        this.listPenderita = listPenderita;
     }
 }

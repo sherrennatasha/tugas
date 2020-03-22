@@ -1,16 +1,14 @@
 package com.apap.tugas.controller;
 
-import com.apap.tugas.model.AsuransiModel;
+import com.apap.tugas.model.SpesialisasiModel;
 import com.apap.tugas.model.DiagnosisPenyakitModel;
-import com.apap.tugas.model.EmergencyContactModel;
-import com.apap.tugas.model.PasienModel;
-import com.apap.tugas.other.AddPasienHandler;
-import com.apap.tugas.other.ChangePasienHandler;
+import com.apap.tugas.model.PustakawanModel;
+import com.apap.tugas.other.AddPustakawanHandler;
+import com.apap.tugas.other.ChangePustakawanHandler;
 import com.apap.tugas.other.HandlingAsuransiDiagnosisSearch;
-import com.apap.tugas.service.AsuransiService;
+import com.apap.tugas.service.SpesialisasiService;
 import com.apap.tugas.service.DiagnosisPenyakitService;
-import com.apap.tugas.service.EmergencyContactService;
-import com.apap.tugas.service.PasienService;
+import com.apap.tugas.service.PustakawanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,54 +17,50 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class PasienController {
+public class PustakawanController {
 
     @Autowired
-    private PasienService pasienService;
+    private PustakawanService pustakawanService;
 
     @Autowired
-    private AsuransiService asuransiService;
-
-    @Autowired
-    private EmergencyContactService emergencyContactService;
+    private SpesialisasiService spesialisasiService;
 
     @Autowired
     private DiagnosisPenyakitService diagnosisPenyakitService;
 
-    // Membuka halaman utama SIPAS
+    // Membuka halaman utama 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        List<PasienModel> pasienList = pasienService.getPustakawanList();
-        model.addAttribute("pasienList", pasienList);
+        List<PustakawanModel> pustakawanList = pustakawanService.getPustakawanList();
+        model.addAttribute("pustakawanList", pustakawanList);
         return "homepage";
     }
 
     // Membuka form untuk menambahkan Pustakawan
     @GetMapping(value = "/pustakawan/tambah")
-    public String showAddPasienForm(@ModelAttribute("addHandler") AddPasienHandler addHandler, Model model) {
-        List<AsuransiModel> asuransiList = asuransiService.getAsuransiList();
-        model.addAttribute("asuransiList", asuransiList);
-        return "pasien-add";
+    public String showAddPustakawanForm(@ModelAttribute("addHandler") AddPustakawanHandler addHandler, Model model) {
+        List<SpesialisasiModel> spesialisasiList = spesialisasiService.getSpesialisasiList();
+        model.addAttribute("spesialisasiList", spesialisasiList);
+        return "pustakawan-add";
     }
 
     // Melakukan submit form untuk menambahkan Pustakawan
     @PostMapping(value = "/pustakawan/tambah")
-    public String submitAddPasienForm(@ModelAttribute("addHandler") AddPasienHandler addHandler, Model model) {
-        String nipPustakawan = pasienService.addPustakawan(addHandler);
+    public String submitAddPustakawanForm(@ModelAttribute("addHandler") AddPustakawanHandler addHandler, Model model) {
+        String nipPustakawan = pustakawanService.addPustakawan(addHandler);
         model.addAttribute(
                 "pesan", "Pustakawan " + addHandler.getNamaPustakawan() + " dengan kode pustakawan " + nipPustakawan + " berhasil ditambahkan!"
         );
         return "message-info";
     }
 
-    /**
-    // Membuka detail dari pasien berdasarkan NIK pasien
-    @GetMapping(value = "/pasien")
-    public String showPasienInfoByNik(@RequestParam(value = "nikPasien") String nikPasien, Model model) {
-        PasienModel pasien = pasienService.getPasienByNikPasien(nikPasien);
-        model.addAttribute("pasien", pasien);
-        return "pasien-detail";
-    }**/
+    @GetMapping(value = "/pasien/detail")
+    public String showPustakawanInfoById(@RequestParam(value = "idPustakawan") Long idPustakawan, Model model) {
+    	PustakawanModel pustakawan = pustakawanService.getPustakawanByIdPustakawan(idPustakawan);
+        model.addAttribute("pustakawan", pustakawan);
+        return "pustakawan-detail";
+    }
+  
 
     /**
      * // Membuka form untuk mengubah pasien
@@ -125,13 +119,13 @@ public class PasienController {
     }
     **/
 
-    // Melakukan penghapusan data pasien
-    @GetMapping(value = "/pasien/hapus/{idPustakawan}")
+    // Melakukan penghapusan data 
+    @GetMapping(value = "/pustakawan/hapus/{idPustakawan}")
     public String deleteDiagnosisPenyakit(@PathVariable("idPustakawan") Long idPustakawan, Model model)
     {
-        PasienModel pustakawan = pasienService.getPustakawanByIdPustakawan(idPustakawan);
-        pasienService.deletePustakawan(pustakawan);
-        model.addAttribute("pesan", "Data pasien berhasil dihapus!");
+    	PustakawanModel pustakawan = pustakawanService.getPustakawanByIdPustakawan(idPustakawan);
+        pustakawanService.deletePustakawan(pustakawan);
+        model.addAttribute("pesan", "Data pustakawan berhasil dihapus!");
         return "message-info";
     }
     
