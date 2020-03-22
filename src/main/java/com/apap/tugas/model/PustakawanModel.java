@@ -50,10 +50,10 @@ public class PustakawanModel implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "pustakawan_diagnosis_penyakit",
+            name = "pustakawan_perpustakaan",
             joinColumns = @JoinColumn(name = "pustakawanId"),
-            inverseJoinColumns = @JoinColumn(name = "diagnosisPenyakitId"))
-    private List<DiagnosisPenyakitModel> listDiagnosisPenyakit;
+            inverseJoinColumns = @JoinColumn(name = "perpustakaanId"))
+    private List<PerpustakaanModel> listPerpustakaan;
 
     public Long getIdPustakawan() {
         return idPustakawan;
@@ -127,19 +127,19 @@ public class PustakawanModel implements Serializable {
         listSpesialisasi.remove(spesialisasi);
     }
 
-    public List<DiagnosisPenyakitModel> getListDiagnosisPenyakit() {
-        return listDiagnosisPenyakit;
+    public List<PerpustakaanModel> getListPerpustakaan() {
+        return listPerpustakaan;
     }
 
-    public void setListDiagnosisPenyakit(List<DiagnosisPenyakitModel> listDiagnosisPenyakit) {
-        this.listDiagnosisPenyakit = listDiagnosisPenyakit;
+    public void setListPerpustakaan(List<PerpustakaanModel> listPerpustakaan) {
+        this.listPerpustakaan = listPerpustakaan;
     }
 
-    public void addDiagnosisPenyakit(DiagnosisPenyakitModel diagnosisPenyakit){
-        listDiagnosisPenyakit.add(diagnosisPenyakit);
+    public void addPerpustakaan(PerpustakaanModel perpustakaan){
+        listPerpustakaan.add(perpustakaan);
     }
 
-    public void removeDiagnosisPenyakit(DiagnosisPenyakitModel diagnosisPenyakitModel){
-        listDiagnosisPenyakit.remove(diagnosisPenyakitModel);
+    public void removePerpustakaan(PerpustakaanModel perpustakaanModel){
+        listPerpustakaan.remove(perpustakaanModel);
     }
 }

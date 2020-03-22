@@ -1,13 +1,13 @@
 package com.apap.tugas.controller;
 
 import com.apap.tugas.model.SpesialisasiModel;
-import com.apap.tugas.model.DiagnosisPenyakitModel;
+import com.apap.tugas.model.PerpustakaanModel;
 import com.apap.tugas.model.PustakawanModel;
 import com.apap.tugas.other.AddPustakawanHandler;
 import com.apap.tugas.other.ChangePustakawanHandler;
 import com.apap.tugas.other.HandlingAsuransiDiagnosisSearch;
 import com.apap.tugas.service.SpesialisasiService;
-import com.apap.tugas.service.DiagnosisPenyakitService;
+import com.apap.tugas.service.PerpustakaanService;
 import com.apap.tugas.service.PustakawanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +26,9 @@ public class PustakawanController {
     private SpesialisasiService spesialisasiService;
 
     @Autowired
-    private DiagnosisPenyakitService diagnosisPenyakitService;
+    private PerpustakaanService perpustakaanService;
 
-    // Membuka halaman utama 
+    
     @GetMapping("/")
     public String showHomePage(Model model) {
         List<PustakawanModel> pustakawanList = pustakawanService.getPustakawanList();
@@ -36,7 +36,7 @@ public class PustakawanController {
         return "homepage";
     }
 
-    // Membuka form untuk menambahkan Pustakawan
+    
     @GetMapping(value = "/pustakawan/tambah")
     public String showAddPustakawanForm(@ModelAttribute("addHandler") AddPustakawanHandler addHandler, Model model) {
         List<SpesialisasiModel> spesialisasiList = spesialisasiService.getSpesialisasiList();
@@ -44,7 +44,7 @@ public class PustakawanController {
         return "pustakawan-add";
     }
 
-    // Melakukan submit form untuk menambahkan Pustakawan
+    
     @PostMapping(value = "/pustakawan/tambah")
     public String submitAddPustakawanForm(@ModelAttribute("addHandler") AddPustakawanHandler addHandler, Model model) {
         String nipPustakawan = pustakawanService.addPustakawan(addHandler);

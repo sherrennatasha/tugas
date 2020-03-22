@@ -1,7 +1,7 @@
 package com.apap.tugas.service;
 
 import com.apap.tugas.model.SpesialisasiModel;
-import com.apap.tugas.model.DiagnosisPenyakitModel;
+import com.apap.tugas.model.PerpustakaanModel;
 
 import com.apap.tugas.model.PustakawanModel;
 import com.apap.tugas.other.AddPustakawanHandler;
@@ -41,19 +41,18 @@ public class PustakawanServiceImpl implements PustakawanService {
             e.printStackTrace();
         }
 
-        // Membuat pasien baru
+        
         PustakawanModel pustakawan = new PustakawanModel();
 
         String nipPustakawan = createNipPustakawan(dataHandler.getJenisKelaminPustakawan(), tanggalLahirStr);
         pustakawan.setNip(nipPustakawan);
 
         pustakawan.setNama(dataHandler.getNamaPustakawan());
-        //pustakawan.setNik(dataHandler.getNikPasien());
+        
         pustakawan.setJenisKelamin(dataHandler.getJenisKelaminPustakawan());
         pustakawan.setTanggalLahir(tanggalLahirPustakawan);
         pustakawan.setTempatLahir(dataHandler.getTempatLahirPustakawan());
-        //pustakawan.setEmergencyContact(contact);
-
+       
         
         List<SpesialisasiModel> listSpesialisasi = new ArrayList<>();
 
@@ -64,6 +63,7 @@ public class PustakawanServiceImpl implements PustakawanService {
 
         return nipPustakawan;
     }
+    
 
     @Override
     public List<PustakawanModel> getPustakawanList() {
@@ -75,15 +75,14 @@ public class PustakawanServiceImpl implements PustakawanService {
         return pustakawanDb.findByIdPustakawan(idPustakawan);
     }
     
-    /**
     @Override
-    public PasienModel getPasienByNikPasien(String nik) {
-        return pasienDb.findByNik(nik);
-    }**/
+    public PustakawanModel getPustakawanByNipPustakawan(String nipPustakawan) {
+        return pustakawanDb.findByNipPustakawan(nipPustakawan);
+    }
 
     @Override
-    public void addDiagnosisToPustakawan(PustakawanModel pustakawan, DiagnosisPenyakitModel diagnosisPenyakit) {
-        pustakawan.addDiagnosisPenyakit(diagnosisPenyakit);
+    public void addPerpustakaanToPustakawan(PustakawanModel pustakawan, PerpustakaanModel perpustakaan) {
+        pustakawan.addPerpustakaan(perpustakaan);
         pustakawanDb.save(pustakawan);
     }
 
@@ -101,10 +100,7 @@ public class PustakawanServiceImpl implements PustakawanService {
 
         PustakawanModel pustakawanTarget = pustakawanDb.findByIdPustakawan(pustakawan.getIdPustakawan());
         
-        /**EmergencyContactModel contactTarget = emergencyContactDb.findByIdEmergencyContact(
-                pustakawan.getEmergencyContact().getIdEmergencyContact()
-        );**/
-
+       
         Timestamp newDateOfBirth = new Timestamp(tanggalLahirPustakawan.getTime());
 
         String nipPustakawan = pustakawanTarget.getNip();
@@ -113,18 +109,13 @@ public class PustakawanServiceImpl implements PustakawanService {
             nipPustakawan = createNipPustakawan(pustakawanTarget.getJenisKelamin(), tanggalLahirStr);
             pustakawanTarget.setNip(nipPustakawan);
         }
-        /**
-        contactTarget.setNama(dataHandler.getNamaEmergency());
-        contactTarget.setNik(dataHandler.getNikEmergency());
-        contactTarget.setNomorHp(dataHandler.getNomorHpEmergency());
-        emergencyContactDb.save(contactTarget);
-		**/
+       
         pustakawanTarget.setNama(dataHandler.getNamaPustakawan());
-       // pasienTarget.setNik(dataHandler.getNikPasien());
+      
         pustakawanTarget.setJenisKelamin(dataHandler.getJenisKelaminPustakawan());
         pustakawanTarget.setTanggalLahir(tanggalLahirPustakawan);
         pustakawanTarget.setTempatLahir(dataHandler.getTempatLahirPustakawan());
-       // pasienTarget.setEmergencyContact(contactTarget);
+       
         pustakawanDb.save(pustakawanTarget);
         return nipPustakawan;
     }
