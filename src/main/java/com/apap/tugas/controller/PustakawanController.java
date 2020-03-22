@@ -61,33 +61,28 @@ public class PustakawanController {
         return "pustakawan-detail";
     }
     
-
-    /**
-     * // Membuka form untuk mengubah pasien
-    @GetMapping(value = "/pasien/ubah/{nikPasien}")
-    public String showChangePasienForm(@PathVariable String nikPasien,
-                                       @ModelAttribute("changeHandler") ChangePasienHandler changeHandler,
+    @GetMapping(value = "/pustakawan/ubah/{idPustakawan}")
+    public String showChangePasienForm(@PathVariable Long idPustakawan,
+                                       @ModelAttribute("changeHandler") ChangePustakawanHandler changeHandler,
                                        Model model) {
-        PasienModel pasien = pasienService.getPasienByNikPasien(nikPasien);
-        model.addAttribute("pasien", pasien);
-        return "pasien-change";
-    }**/
-    
-    /**
-    // Submit form untuk mengubah pasien
-    @PostMapping(value = "/pasien/ubah/{nikPasien}")
-    public String showChangePasienForm(@PathVariable String nikPasien,
-                                       @ModelAttribute PasienModel pasien,
-                                       @ModelAttribute EmergencyContactModel emergencyContact,
-                                       @ModelAttribute("changeHandler") ChangePasienHandler changeHandler,
+        PustakawanModel pustakawan = pustakawanService.getPustakawanByIdPustakawan(idPustakawan);
+        model.addAttribute("pustakawan", pustakawan);
+        return "pustakawan-change";
+    } 
+   
+    @PostMapping(value = "/pustakawan/ubah/{idPustakawan}")
+    public String showChangePasienForm(@PathVariable Long idPustakawan,
+                                       @ModelAttribute PustakawanModel pustakawan,
+                                    
+                                       @ModelAttribute("changeHandler") ChangePustakawanHandler changeHandler,
                                        Model model) {
-        String kodePasien = pasienService.changePasienData(pasien, changeHandler);
+        String kodePustakawan = pustakawanService.changePustakawanData(pustakawan, changeHandler);
         model.addAttribute(
-                "pesan", "Pasien " + changeHandler.getNamaPasien() + " berhasil diubah, Kode pasien: " + kodePasien
+                "pesan", "Pustakawan " + changeHandler.getNamaPustakawan() + " berhasil diubah, ID Pustakawan: " + kodePustakawan
         );
         return "message-info";
-    
-
+    }
+        	/**
     // Membuka form untuk menambah diagnosis penyakit pasien
     @GetMapping(value = "/pasien/{nikPasien}/tambah-diagnosis")
     public String showAddDiagnosisPenyakitForm(@PathVariable String nikPasien,

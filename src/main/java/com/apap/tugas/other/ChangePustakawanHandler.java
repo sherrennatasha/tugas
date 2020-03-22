@@ -2,7 +2,7 @@ package com.apap.tugas.other;
 
 public class ChangePustakawanHandler {
 
- 
+	private String nipPustakawan;
     private String namaPustakawan;
     private Integer jenisKelaminPustakawan;
     private String tanggalLahirPustakawan;
@@ -11,10 +11,20 @@ public class ChangePustakawanHandler {
     public String getNamaPustakawan() {
         return namaPustakawan;
     }
-
     public void setNamaPustakawan(String namaPustakawan) {
         this.namaPustakawan = namaPustakawan;
     }
+
+
+    public void setNipPustakawan(String nipPustakawan) {
+        this.nipPustakawan = nipPustakawan;
+    }
+    public String getNipPustakawan() {
+        return nipPustakawan;
+    }
+
+    
+
 
     public Integer getJenisKelaminPustakawan() {
         return jenisKelaminPustakawan;
