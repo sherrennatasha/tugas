@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PustakawanDb extends JpaRepository<PustakawanModel, Long> {
    PustakawanModel findByIdPustakawan(Long idPustakawan);
-   PustakawanModel findByNipPustakawan(String nipPustakawan);
   
 }

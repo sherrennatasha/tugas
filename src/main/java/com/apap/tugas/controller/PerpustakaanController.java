@@ -29,7 +29,7 @@ public class PerpustakaanController {
         return "perpustakaan-all";
     }
 
-    // Menampilkan perpustakaan berdasarkan id 
+    
     @GetMapping(value = "/perpustakaan")
     public String showPerpustakaanById(@RequestParam(value = "idPerpustakaan") Long idPerpustakaan, Model model)
     {
@@ -40,7 +40,7 @@ public class PerpustakaanController {
         return "perpustakaan-detail";
     }
 
-    // Membuka form untuk menambahkan perpustakaan dari pustakawan
+   
     @GetMapping(value = "/perpustakaan/tambah")
     public String showAddPerpustakaanForm(Model model)
     {
@@ -49,7 +49,7 @@ public class PerpustakaanController {
         return "perpustakaan-add";
     }
 
-    // Mengirimkan data dari form tambah perpustakaan ke database
+    
     @PostMapping(value = "/perpustakaan/tambah")
     public String submitAddPerpustakaanForm(@ModelAttribute PerpustakaanModel perpustakaan,
                                                  Model model)
@@ -59,7 +59,7 @@ public class PerpustakaanController {
         return "message-info";
     }
 
-    // Melakukan penghapusan data Perpustakaan
+   
     @GetMapping(value = "/perpustakaan/hapus/{idPerpustakaan}")
     public String deletePerpustakaan(@PathVariable("idPerpustakaan") Long idPerpustakaan,
                                           Model model)

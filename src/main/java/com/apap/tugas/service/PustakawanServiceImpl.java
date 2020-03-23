@@ -75,10 +75,6 @@ public class PustakawanServiceImpl implements PustakawanService {
         return pustakawanDb.findByIdPustakawan(idPustakawan);
     }
     
-    @Override
-    public PustakawanModel getPustakawanByNipPustakawan(String nipPustakawan) {
-        return pustakawanDb.findByNipPustakawan(nipPustakawan);
-    }
 
     @Override
     public void addPerpustakaanToPustakawan(PustakawanModel pustakawan, PerpustakaanModel perpustakaan) {

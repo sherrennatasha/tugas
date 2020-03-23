@@ -11,8 +11,7 @@ public interface PustakawanService {
     String addPustakawan(AddPustakawanHandler dataHandler);
     List<PustakawanModel> getPustakawanList();
     PustakawanModel getPustakawanByIdPustakawan(Long idPustakawan);
-    PustakawanModel getPustakawanByNipPustakawan(String nipPustakawan);
-    void addPerpustakaanToPustakawan(PustakawanModel pustakawan, PerpustakaanModel diagnosisPenyakit);
+    void addPerpustakaanToPustakawan(PustakawanModel pustakawan, PerpustakaanModel perpustakaan);
     String changePustakawanData(PustakawanModel pustakawan, ChangePustakawanHandler dataHandler);
     void deletePustakawan(PustakawanModel pustakawan);
     String createNipPustakawan(int jenisKelamin, String dateOfBirth);
