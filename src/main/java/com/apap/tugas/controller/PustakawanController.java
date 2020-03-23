@@ -61,7 +61,7 @@ public class PustakawanController {
         return "pustakawan-detail";
     }
     
-    @GetMapping(value = "/pustakawan/ubah/{idPustakawan}")
+    @GetMapping(value = "/pustakawan/update/{idPustakawan}")
     public String showChangePasienForm(@PathVariable Long idPustakawan,
                                        @ModelAttribute("changeHandler") ChangePustakawanHandler changeHandler,
                                        Model model) {
@@ -70,7 +70,7 @@ public class PustakawanController {
         return "pustakawan-change";
     } 
    
-    @PostMapping(value = "/pustakawan/ubah/{idPustakawan}")
+    @PostMapping(value = "/pustakawan/update/{idPustakawan}")
     public String showChangePasienForm(@PathVariable Long idPustakawan,
                                        @ModelAttribute PustakawanModel pustakawan,
                                     
@@ -84,7 +84,7 @@ public class PustakawanController {
     }
         
 
-    @GetMapping(value = "/pustakawan/hapus/{idPustakawan}")
+    @GetMapping(value = "/pustakawan/delete/{idPustakawan}")
     public String deleteDiagnosisPenyakit(@PathVariable("idPustakawan") Long idPustakawan, Model model)
     {
     	PustakawanModel pustakawan = pustakawanService.getPustakawanByIdPustakawan(idPustakawan);

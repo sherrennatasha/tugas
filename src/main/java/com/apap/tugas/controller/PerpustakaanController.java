@@ -22,7 +22,7 @@ public class PerpustakaanController {
     private PerpustakaanService perpustakaanService;
 
     @GetMapping(value = "/perpustakaan-all")
-    public String showAllDiagnosisPenyakit(Model model)
+    public String showAllPerpustakaan(Model model)
     {
         List<PerpustakaanModel> perpustakaanList = perpustakaanService.getPerpustakaanList();
         model.addAttribute("perpustakaanList", perpustakaanList);
@@ -60,7 +60,7 @@ public class PerpustakaanController {
     }
 
    
-    @GetMapping(value = "/perpustakaan/hapus/{idPerpustakaan}")
+    @GetMapping(value = "/perpustakaan/delete/{idPerpustakaan}")
     public String deletePerpustakaan(@PathVariable("idPerpustakaan") Long idPerpustakaan,
                                           Model model)
     {

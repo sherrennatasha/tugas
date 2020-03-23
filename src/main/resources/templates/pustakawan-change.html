@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header bg-dark text-white">Masukkan Data Baru Pustakawan</div>
         <div class="card-body">
-            <form th:action="@{/pustakawan/ubah/} + ${pustakawan.idPustakawan}" th:object="${changeHandler}" method="POST">
+            <form th:action="@{/pustakawan/update/} + ${pustakawan.idPustakawan}" th:object="${changeHandler}" method="POST">
                 <input type="hidden" th:field="${pustakawan.idPustakawan}" />
                 
                 <div class="row">
